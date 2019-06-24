@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Entrez utilisateur : " 
+read -r user
+sudo pkill -u "$user"
