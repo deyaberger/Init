@@ -2,4 +2,4 @@
 echo "Entrez utilisateur : " 
 read -r user
 sudo pkill -u "$user"
-sudo passwd -l "$user"
+sudo userdel -r "$user"
