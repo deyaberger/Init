@@ -1,1 +1,1 @@
-ps -aux | grep 'sshd' | awk '{print$2}' | head -1
+sudo service sshd status | grep "Main PID"

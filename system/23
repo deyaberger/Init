@@ -1,1 +1,2 @@
-su <name_user>
+Sur terminal : su <username> suivi du mot de passe associe
+En graphique : Logout / changer d'utilisateur puis entrer <username> et <mdp>

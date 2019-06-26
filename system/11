@@ -1,1 +1,1 @@
-df -h --total
+sudo df -h --total

@@ -1,1 +1,17 @@
-sudo service --status-all
+sudo service --status-all && echo "deamon"
+[ - ]  console-setup.sh
+[ + ]  cron
+[ + ]  dbus
+[ + ]  exim4
+[ - ]  hwclock.sh
+[ + ]  irqbalance
+[ - ]  keyboard-setup.sh
+[ + ]  kmod
+[ + ]  networking
+[ + ]  procps
+[ - ]  rsync
+[ + ]  rsyslog
+[ + ]  ssh
+[ - ]  sudo
+[ + ]  udev
+deamon

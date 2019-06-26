@@ -1,2 +1,1 @@
-ifconfig | grep 'broadcast' | awk '{print$6}'
-ipconfig getifaddr en0
+ifconfig | grep 'broadcast' | awk '{print$6}' && ipconfig getifaddr en0

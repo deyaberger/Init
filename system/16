@@ -1,1 +1,1 @@
-sudo cron 
+Service d'execution de taches a horaire regulier : cron

@@ -1,0 +1,2 @@
+Dans le fichier /etc/hosts ajouter une ligne contenant 'IP adress' suivi de 'DNS name'
+Tel que dans notre cas : echo "46.19.122.85 intra.42.fr" >> /etc/hosts
