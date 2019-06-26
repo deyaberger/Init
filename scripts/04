@@ -1,10 +1,10 @@
 #!/bin/sh
 clear
-echo -en "				Hey, what's your name? "
+echo -en "		       Hey, what's your name? "
 read -r corrector
-echo "				Hi    $corrector" | figlet -c
-echo -e "\033[1;31mSo ... This script is a bit boring but it can be useful. Let's imagine you are in a hurry, your steakoverflow is ready, but you need to create a file first and change its rights... Thanks Goooood we have a script for that!\033[0m \nPlease enter the name of the new file. Or, if you find this correction boring, tap \033[31mexit\033[0m to cancel"
-echo -e "file name:"
+echo "	                Hi    $corrector" | figlet
+echo -e "\033[1;36m\n\n            So ... This script is a bit boring but it can be useful.\n\n        Let's imagine you are in a hurry, your steakoverflow is ready, \n       but you need to create a file first and change its rights...\n                 Thanks Goooood we have a script for that!\033[0m \n\n                 Please enter the name of the new file. \n       Or, if you find this correction boring, tap \033[31mexit\033[0m to cancel"
+echo -e "\nfile name:"
 read -r name
 if [ "$name" = 'exit' ]; then
 	echo -e "         Bye   Bye    " | figlet -c
@@ -12,7 +12,7 @@ if [ "$name" = 'exit' ]; then
 fi
 while [ "$(ls -p | grep -wc "$name")"  = 1 ]
 do
-	echo -e "\033[31mThis file already exists\033[0m. \033[1;31mCom'on, be creative, use another file name. Or just tap\033[0m \033[31mexit\033[0m to cancel."
+	echo -e "\033[31m\nThis file already exists\033[0m. \033[1;35mCom'on, be creative, use another file name. Or just tap\033[0m \033[31mexit\033[1;35m to cancel.\033[0m"
 	read -r name
 	if [ "$name" = 'exit' ]; then
 		echo -e "         Bye   Bye    " | figlet -c
@@ -21,11 +21,11 @@ do
 done
 sudo touch $name
 
-echo -e "         Ok $corrector, now which permissions do you want for your new file **** $name **** ?????\n1. read write (default)\n2. read write execute\n3. read only\n4. Read execute"
-echo -e "(1, 2, 3, 4)?:"
+echo -e "         \033[1;36m\nOk \033[0m$corrector\033[1;36m, now which permissions do you want for your new file ****\033[0m $name \033[1;36m**** ?????\n\n\033[1;36m1. \033[0mread write (default)\n\033[1;36m2. \033[0mread write execute\n\033[1;36m3. \033[0mread only\n\033[1;36m4. \033[0mRead execute"
+echo -e "\n(1, 2, 3, 4)?:"
 read -r perm
 if [ $perm != 1 ] && [ $perm != 2 ] && [ $perm != 3 ] && [ $perm != 4 ]; then
-	echo -e "\033[31mInvalid option.\033[0m \033[1;31mOh please, you did a piscine, I'm sure you can write a number between 1 and 4.... let's try again:\033[0m"
+	echo -e "\033[31mInvalid option.\033[0m \033[1;35mOh please, you did a piscine, I'm sure you can write a number between 1 and 4.... let's try again:\033[0m"
 	read -r perm
 fi
 if [ "$perm" = 1 ]; then
@@ -37,22 +37,22 @@ elif [ "$perm" = 3 ]; then
 elif [ "$perm" = 4 ]; then
 	sudo chmod 555 "$name"
 fi
-echo -e "In which folder do you want to put your incredible file **** $name **** ? Tap \033[31mc\033[0m if you want to leave it in the current folder. Tap \033[31mexit\033[0m to cancel."
-echo -e "folder:"
+echo -e "\033[1;36m\nGood! now in which folder do you want to put your incredible file ****\033[0m $name \033[1;36m**** ?\n\033[0mTap \033[31mc\033[0m if you want to leave it in the current folder. Tap \033[31mexit\033[0m to cancel."
+echo -e "\nfolder:"
 read -r folder
 if [ "$folder" = 'exit' ]; then
 	echo -e "         Bye   Bye    " | figlet -c
 	sudo rm "$name"
 	exit
 elif [ "$folder" = 'c' ]; then
-	echo "file created in the current folder:"
+	echo -e "\033[32mfile created in the current folder:\033[0m"
 	echo -e "         done    " | figlet -c
 elif [ "$(ls -p | grep -v / | grep -wc "$folder")" = 1 ]; then
-	echo "filed moved to the existing folder **** $folder **** :"
+	echo -e "\033[32mfiled moved to the existing folder ****\033[0m $folder \033[32m**** :\033[0m"
 	sudo mv "$name" "$folder"
 	echo -e "         done    " | figlet -c
 elif [ "$(ls -p | grep -v / | grep -wc "$folder")" = 0 ]; then
-	echo "filed moved to the new folder **** $folder **** :"
+	echo -e "\033[32mfiled moved to the new folder **** \033[0m$folder\033[32m **** :\033[0m"
 	sudo mkdir "$folder"
 	sudo mv "$name" "$folder"
 	echo -e "         done    " | figlet -c
