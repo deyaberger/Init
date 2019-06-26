@@ -1,30 +1,31 @@
 #!/bin/sh
-
-echo -e "				Hey, what's your name?"
+clear
+echo -en "				Hey, what's your name? "
 read -r corrector
 echo "				Hi    $corrector" | figlet -c
 echo -e "\033[1;31mSo ... This script is a bit boring but it can be useful. Let's imagine you are in a hurry, your steakoverflow is ready, but you need to create a file first and change its rights... Thanks Goooood we have a script for that!\033[0m \nPlease enter the name of the new file. Or, if you find this correction boring, tap \033[31mexit\033[0m to cancel"
 echo -e "file name:"
 read -r name
 if [ "$name" = 'exit' ]; then
+	echo -e "         Bye   Bye    " | figlet -c
 	exit
 fi
-while [ "(ls -p | grep -v / | grep -wc "$name")"  = 1 ]
+while [ "$(ls -p | grep -wc "$name")"  = 1 ]
 do
 	echo -e "\033[31mThis file already exists\033[0m. \033[1;31mCom'on, be creative, use another file name. Or just tap\033[0m \033[31mexit\033[0m to cancel."
 	read -r name
-	if [ "$name" = 'exit' ]
-	then
+	if [ "$name" = 'exit' ]; then
+		echo -e "         Bye   Bye    " | figlet -c
 		exit
 	fi
 done
 sudo touch $name
 
-echo -e "         Ok $corrector, now which permissions do you want for your new file **** $name ****?????\n1. read write (default)\n2. read write execute\n3. read only\n4. Other"
+echo -e "         Ok $corrector, now which permissions do you want for your new file **** $name **** ?????\n1. read write (default)\n2. read write execute\n3. read only\n4. Read execute"
 echo -e "(1, 2, 3, 4)?:"
 read -r perm
 if [ $perm != 1 ] && [ $perm != 2 ] && [ $perm != 3 ] && [ $perm != 4 ]; then
-	echo -e "\033[31mInvalid permission perm. \033[1;31mOh please, you did a piscine, I'm sure you can write a perm between 1 and 4.... let's try again:\033[0m"
+	echo -e "\033[31mInvalid option.\033[0m \033[1;31mOh please, you did a piscine, I'm sure you can write a number between 1 and 4.... let's try again:\033[0m"
 	read -r perm
 fi
 if [ "$perm" = 1 ]; then
@@ -34,30 +35,24 @@ elif [ "$perm" = 2 ]; then
 elif [ "$perm" = 3 ]; then
 	sudo chmod 444 "$name"
 elif [ "$perm" = 4 ]; then
-	read -r number
-	while [ "$number" -ge 777 ]; do
-		echo "\033[31mInvalid permission number\033[0m. Please enter a valid permission number, like 774, 064, but not 69 ."
-		read -r number
-	done
-	read number
-	sudo chmod "$number" "$name"
+	sudo chmod 555 "$name"
 fi
-
-echo -e "In which folder do you want to put your incredible file ""$name"" ? Tap \033[31mc\033[0m if you want to leave it in the current folder. Tap \033[31mexit\033[0m to cancel."
+echo -e "In which folder do you want to put your incredible file **** $name **** ? Tap \033[31mc\033[0m if you want to leave it in the current folder. Tap \033[31mexit\033[0m to cancel."
 echo -e "folder:"
 read -r folder
 if [ "$folder" = 'exit' ]; then
+	echo -e "         Bye   Bye    " | figlet -c
 	sudo rm "$name"
 	exit
 elif [ "$folder" = 'c' ]; then
-	echo "rien du tout"
+	echo "file created in the current folder:"
 	echo -e "         done    " | figlet -c
-elif [ "(ls -p | grep -v / | grep -wc "$folder")" = 1 ]; then
-	echo "existe deja"
+elif [ "$(ls -p | grep -v / | grep -wc "$folder")" = 1 ]; then
+	echo "filed moved to the existing folder **** $folder **** :"
 	sudo mv "$name" "$folder"
 	echo -e "         done    " | figlet -c
-elif [ "(ls -p | grep -v | grep -wc "$folder")" = 0 ]; then
-	echo "creation de fichier"
+elif [ "$(ls -p | grep -v / | grep -wc "$folder")" = 0 ]; then
+	echo "filed moved to the new folder **** $folder **** :"
 	sudo mkdir "$folder"
 	sudo mv "$name" "$folder"
 	echo -e "         done    " | figlet -c
