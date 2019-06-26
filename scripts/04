@@ -24,10 +24,11 @@ sudo touch $name
 echo -e "         \033[1;36m\nOk \033[0m$corrector\033[1;36m, now which permissions do you want for your new file ****\033[0m $name \033[1;36m**** ?????\n\n\033[1;36m1. \033[0mread write (default)\n\033[1;36m2. \033[0mread write execute\n\033[1;36m3. \033[0mread only\n\033[1;36m4. \033[0mRead execute"
 echo -e "\n(1, 2, 3, 4)?:"
 read -r perm
-if [ $perm != 1 ] && [ $perm != 2 ] && [ $perm != 3 ] && [ $perm != 4 ]; then
+while [ $perm != 1 ] && [ $perm != 2 ] && [ $perm != 3 ] && [ $perm != 4 ]
+do
 	echo -e "\033[31mInvalid option.\033[0m \033[1;35mOh please, you did a piscine, I'm sure you can write a number between 1 and 4.... let's try again:\033[0m"
 	read -r perm
-fi
+done
 if [ "$perm" = 1 ]; then
 	sudo chmod 644 "$name"
 elif [ "$perm" = 2 ]; then
